@@ -21,8 +21,29 @@ def softmax(x, axis=-1):
     e_x = np.exp(x - x_max)
     return e_x / np.sum(e_x, axis=axis, keepdims=True)
 
+class ScaledDotProductAttention:
+    def __init__(self):
+        pass
 
-# Exemplo de uso do softmax
-scores = np.array([2.0, 1.0, 0.3])
-probabilities = softmax(scores)
-print("Softmax Probabilities:", probabilities)
+    def forward(self, Q, K, V):
+        """
+        Calcula a atenção dadas as matrizes de consulta (Q), chave (K) e valor (V).
+        """
+        
+        # Produto Escalar (Q K^T)
+        scores = np.matmul(Q, K.T) 
+
+        # Dimensao dos vetores de chave
+        d_k = K.shape[-1]
+
+        # Aplicando o scaling factor (sqrt(d_k))
+        scaled_scores = scores / np.sqrt(d_k)
+
+        # Aplicando softmax para obter as atenções linha a linha
+        attention_weights = softmax(scaled_scores)
+
+        # Multiplicando as atenções pelos valores (V)
+        output = np.matmul(attention_weights, V)
+
+        return output, attention_weights
+
