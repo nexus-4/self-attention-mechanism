@@ -70,7 +70,7 @@ class SyntheticDatasetGenerator:
         print(f"Divisão concluída: {len(train_data)} treino | {len(test_data)} teste.")
 
 if __name__ == "__main__":
-    MINHA_API_KEY = "AIzaSyA7_EhmrAGeHpYF7okX0xG8lZFaVqGSm5M" 
+    MINHA_API_KEY = "" 
     
     TEMA_ESCOLHIDO = "Project Hail Mary (Astrofísica e Sobrevivência Espacial)" 
     
